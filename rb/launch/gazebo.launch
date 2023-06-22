@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="world" default="$(find rb)/worlds/test_wold.world"/>
+  <arg name="model" default="$(find rb)/description/example_robot.urdf.xacro"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world)"/>
+  </include>
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-urdf -model example_robot -param robot_description"/>
+
+</launch>
